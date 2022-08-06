@@ -48,11 +48,10 @@ public class MainTest {
         String maHSsua = sc.nextLine();
         /*
         maHSsua = :
-        1. Sua Ho Va Ten Dem
-        2. Sua Ten
-        3. Sua Lop
-        4. Sua Ngay Sinh
-        5. Sua Que Quan
+        1. Sua Ho Va Ten cua hoc sinh
+        2. Sua Lop
+        3. Sua Ngay Sinh
+        4. Sua Que Quan
          */
         for (HocSinh items : list) {
             if (items.getMaHS().equals(maHSsua)) {

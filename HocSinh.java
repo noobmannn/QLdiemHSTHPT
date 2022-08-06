@@ -101,12 +101,19 @@ public class HocSinh {
         //nhap ma hoc sinh
         System.out.println("Ma hoc sinh: ");
         setMaHS(sc.nextLine());
-        //nhap ho va ten dem
-        System.out.println("Ho va Ten Dem: ");
-        setHoVaTenDem(sc.nextLine());
-        //nhap ten
-        System.out.println("Ten hoc sinh: ");
-        setTen(sc.nextLine());
+        //nhap ho va ten day du
+        System.out.println("Nhap ho va ten cua hoc sinh: ");
+        String fullName = sc.nextLine();
+        //tach ho ten day du ra thanh ho va ten
+        String item[] = fullName.split(" ");
+        String lastName = item[item.length - 1];
+        String firstName = "";
+        for (int i = 0; i < item.length - 1; i++) {
+            firstName += item[i];
+            firstName += " ";
+        }
+        setHoVaTenDem(firstName);
+        setTen(lastName);
         //nhap lop
         System.out.println("Lop: ");
         setLop(sc.nextLine());
@@ -120,7 +127,7 @@ public class HocSinh {
 
     public void xuatThongTin() {
         System.out.println("Ma hoc sinh: " + MaHS);
-        System.out.println("Ho va ten: " + UpperFirstChar(hoVaTenDem) + " " + UpperFirstChar(ten));
+        System.out.println("Ho va ten: " + UpperFirstChar(hoVaTenDem) + UpperFirstChar(ten));
         System.out.println("Lop: " + lop);
         System.out.println("Ngay sinh: " + sinhNhat);
         System.out.println("Que quan: " + UpperFirstChar(queQuan));
@@ -128,15 +135,22 @@ public class HocSinh {
 
     public void suaThongTin(int thongTin, String noiDung) {
         switch (thongTin) {
-            case 1 ->
-                setHoVaTenDem(noiDung);
+            case 1 -> {
+                String item[] = noiDung.split(" ");
+                String lastName = item[item.length - 1];
+                String firstName = "";
+                for (int i = 0; i < item.length - 1; i++) {
+                    firstName += item[i];
+                    firstName += " ";
+                }
+                setHoVaTenDem(firstName);
+                setTen(lastName);
+            }
             case 2 ->
-                setTen(noiDung);
-            case 3 ->
                 setLop(noiDung);
-            case 4 ->
+            case 3 ->
                 setSinhNhat(noiDung);
-            case 5 ->
+            case 4 ->
                 setQueQuan(noiDung);
         }
     }
