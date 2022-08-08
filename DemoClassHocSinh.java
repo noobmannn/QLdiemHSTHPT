@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
-public class MainTest {
+public class DemoClassHocSinh {
 
     public static void show(List<HocSinh> list) {
         System.out.println("----------------------");
@@ -47,7 +47,7 @@ public class MainTest {
         System.out.println("Nhap ma Hoc Sinh cua Sinh Vien Can Sua: ");
         String maHSsua = sc.nextLine();
         /*
-        maHSsua = :
+        tt = :
         1. Sua Ho Va Ten cua hoc sinh
         2. Sua Lop
         3. Sua Ngay Sinh
