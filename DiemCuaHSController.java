@@ -1,12 +1,22 @@
 package com.actvn.qldiemhsthpt;
 
+import com.google.gson.Gson;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Scanner;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
-public class DemoClassDiemCuaHS {
+public class DiemCuaHSController {
+
+    private static final String CURRENT_DIR = System.getProperty("user.dir");
+    private static final String SEPARATOR = File.separator;
+    private static final String JSON_WRITER_PATH = CURRENT_DIR + SEPARATOR + "data" + SEPARATOR + "DiemCuaHS.json";
 
     static Scanner sc = new Scanner(System.in);
 
@@ -52,40 +62,30 @@ public class DemoClassDiemCuaHS {
         }
     }
 
-    public static void filterRanked(List<DiemCuaHS> list, int index) {
-        List<DiemCuaHS> subList;
+    public static List<DiemCuaHS> filterRanked(List<DiemCuaHS> list, int index) {
+        List<DiemCuaHS> subList = null;
         switch (index) {
             case 1 -> {
                 subList = list.stream().filter(e -> e.getHocLuc().equals("Gioi")).collect(Collectors.toList());
-                show(subList);
             }
             case 2 -> {
                 subList = list.stream().filter(e -> e.getHocLuc().equals("Kha")).collect(Collectors.toList());
-                show(subList);
             }
             case 3 -> {
                 subList = list.stream().filter(e -> e.getHocLuc().equals("Trung Binh")).collect(Collectors.toList());
-                show(subList);
             }
             case 4 -> {
                 subList = list.stream().filter(e -> e.getHocLuc().equals("Yeu")).collect(Collectors.toList());
-                show(subList);
             }
             case 5 -> {
                 subList = list.stream().filter(e -> e.getHocLuc().equals("Kem")).collect(Collectors.toList());
-                show(subList);
             }
         }
+        return subList;
     }
 
-    public static void main(String[] args) {
-        System.out.println("Nhap so luong hoc sinh: ");
-        int N = sc.nextInt();
-        sc.nextLine();
-        List<DiemCuaHS> list = new ArrayList<>(N);
+    public static void nhapDanhSachDiem(List<DiemCuaHS> list, int N) {
         String masvv;
-
-        //nhapDanhSachDiem
         for (int i = 0; i < N; i++) {
             System.out.println("Nhap ma sinh vien: ");
             masvv = sc.nextLine();
@@ -99,8 +99,9 @@ public class DemoClassDiemCuaHS {
         }
 
         show(list);
+    }
 
-        //themMotSinhVienVaoDanhSach
+    public static void themMotHocSinhVaoDanhSach(List<DiemCuaHS> list) {
         System.out.println("Nhap Thong Tin Hoc Sinh Can Them Vao: ");
         String masvvv = sc.nextLine();
         double daad[] = new double[10];
@@ -110,8 +111,9 @@ public class DemoClassDiemCuaHS {
         tmp.DiemTb();
         list.add(tmp);
         show(list);
+    }
 
-        //suaDiemChoMotSinhVien
+    public static void suaDiemChoMotHocSinh(List<DiemCuaHS> list) {
         System.out.println("Nhap ma Hoc Sinh cua Sinh Vien Can Sua Diem: ");
         String maHSsua = sc.nextLine();
         /*
@@ -140,8 +142,9 @@ public class DemoClassDiemCuaHS {
         }
 
         show(list);
+    }
 
-        //Xoa mot hoc sinh trong danh sach
+    public static void xoaMotHocSinhTrongDanhSach(List<DiemCuaHS> list) {
         System.out.println("Nhap ma hoc sinh can xoa thong tin: ");
         String maHSxoa = sc.nextLine();
         for (DiemCuaHS items : list) {
@@ -152,8 +155,9 @@ public class DemoClassDiemCuaHS {
         }
 
         show(list);
+    }
 
-        //Sap xep diem theo tung mon
+    public static void sapXepDStheoDiemTungMon(List<DiemCuaHS> list) {
         /*
         0. Toan
         1. Vat Ly
@@ -174,7 +178,9 @@ public class DemoClassDiemCuaHS {
 
         show(list);
 
-        //Loc danh sach hoc sinh theo hoc luc
+    }
+
+    public static List<DiemCuaHS> locDanhSachHStheoHocLuc(List<DiemCuaHS> list) {
         /*
         1. Gioi
         2. Kha
@@ -184,6 +190,56 @@ public class DemoClassDiemCuaHS {
          */
         System.out.println("Loc danh sach hoc sinh theo hoc luc: ");
         int i2 = sc.nextInt();
-        filterRanked(list, i2);
+        return filterRanked(list, i2);
+    }
+
+    public static <E> void writeJSONFile(List<E> list) {
+        FileWriter fw = null;
+        try {
+            fw = new FileWriter(JSON_WRITER_PATH);
+            Gson gson = new Gson();
+
+            gson.toJson(list, fw);
+        } catch (IOException ex) {
+            Logger.getLogger(DiemCuaHSController.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (fw != null) {
+                try {
+                    fw.flush();
+                    fw.close();
+                } catch (IOException ex) {
+                    Logger.getLogger(DiemCuaHSController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+
+    }
+
+    public static void main(String[] args) {
+        System.out.println("Nhap so luong hoc sinh: ");
+        int N = sc.nextInt();
+        sc.nextLine();
+        List<DiemCuaHS> list = new ArrayList<>(N);
+
+        //nhapDanhSachDiem
+        nhapDanhSachDiem(list, N);
+
+        //themMotHocSinhVaoDanhSach
+        themMotHocSinhVaoDanhSach(list);
+
+        //suaDiemChoMotHocSinh
+        suaDiemChoMotHocSinh(list);
+
+        //Xoa mot hoc sinh trong danh sach
+        xoaMotHocSinhTrongDanhSach(list);
+
+        //Sap xep diem theo tung mon
+        sapXepDStheoDiemTungMon(list);
+
+        //Loc danh sach hoc sinh theo hoc luc
+        show(locDanhSachHStheoHocLuc(list));
+
+        //vietRaFileJSON
+        writeJSONFile(list);
     }
 }

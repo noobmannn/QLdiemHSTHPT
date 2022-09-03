@@ -18,5 +18,4 @@ public class DiemTungMon {
     public void setDiem_cac_mon(double diem_cac_mon) {
         this.diem_cac_mon = diem_cac_mon;
     }
-
 }

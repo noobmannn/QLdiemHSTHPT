@@ -2,11 +2,8 @@ package com.actvn.qldiemhsthpt;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class DiemCuaHS {
-
-    Scanner sc = new Scanner(System.in);
 
     private String MaHS;
     private double diemTBmon;

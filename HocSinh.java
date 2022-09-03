@@ -4,8 +4,6 @@ import java.util.Scanner;
 
 public class HocSinh {
 
-    Scanner sc = new Scanner(System.in);
-
     private String MaHS;
     private String hoVaTenDem;
     private String ten;
@@ -98,6 +96,7 @@ public class HocSinh {
     }
 
     public void nhapThongTin() {
+        Scanner sc = new Scanner(System.in);
         //nhap ma hoc sinh
         System.out.println("Ma hoc sinh: ");
         setMaHS(sc.nextLine());
