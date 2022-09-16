@@ -27,6 +27,11 @@ public class DiemCuaHS {
     }
 
     public double getDiemTBmon() {
+        diemTBmon = 0.0;
+        for (DiemTungMon items : TatCaMon) {
+            diemTBmon += items.getDiem_cac_mon();
+        }
+        diemTBmon = diemTBmon / 10;
         return diemTBmon;
     }
 
@@ -35,6 +40,17 @@ public class DiemCuaHS {
     }
 
     public String getHocLuc() {
+        if (getDiemTBmon() >= 8.0) {
+            hocLuc = "Giỏi";
+        } else if (getDiemTBmon() >= 6.5 && getDiemTBmon() < 8.0) {
+            hocLuc = "Khá";
+        } else if (getDiemTBmon() >= 5.0 && getDiemTBmon() < 6.5) {
+            hocLuc = "Trung Bình";
+        } else if (getDiemTBmon() >= 3.5 && getDiemTBmon() < 5.0) {
+            hocLuc = "Yếu";
+        } else if (getDiemTBmon() >= 0 && getDiemTBmon() < 3.5) {
+            hocLuc = "Kém";
+        }
         return hocLuc;
     }
 
