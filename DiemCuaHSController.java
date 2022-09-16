@@ -51,15 +51,17 @@ public class DiemCuaHSController {
         }
     }
 
-    public static void compareSubject(List<DiemCuaHS> list, int index) {
+    public static List<DiemCuaHS> compareSubject(List<DiemCuaHS> list, int index) {
         Comparator<DiemCuaHS> comparator;
         if (index >= 0 && index <= 9) {
             comparator = (o1, o2) -> (int) (o2.getTatCaMon().get(index).getDiem_cac_mon() - o1.getTatCaMon().get(index).getDiem_cac_mon());
             list.sort(comparator);
         } else if (index == 10) {
-            comparator = Comparator.comparing(DiemCuaHS::getDiemTBmon);
+            comparator = Comparator.comparing(DiemCuaHS::getDiemTBmon).reversed();
             list.sort(comparator);
         }
+        List<DiemCuaHS> subList = list;
+        return subList;
     }
 
     public static List<DiemCuaHS> filterRanked(List<DiemCuaHS> list, int index) {

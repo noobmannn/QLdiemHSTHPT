@@ -142,4 +142,16 @@ public class DiemCuaHS {
         System.out.println("------------------------------------");
     }
 
+    public boolean checkdiem(){
+        int c = 0;
+        for(DiemTungMon item : TatCaMon){
+            if(item.getDiem_cac_mon() >= 0 && item.getDiem_cac_mon() <= 10){
+                c++;
+            }
+        }
+        if(c == 10){
+            return true;
+        }
+        return false;
+    }
 }

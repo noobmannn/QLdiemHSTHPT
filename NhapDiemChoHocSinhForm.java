@@ -1,26 +1,11 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package com.actvn.qldiemhsthpt;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author Dell
- */
 public class NhapDiemChoHocSinhForm extends javax.swing.JFrame {
 
     static List<DiemCuaHS> data;
@@ -38,7 +23,7 @@ public class NhapDiemChoHocSinhForm extends javax.swing.JFrame {
     public NhapDiemChoHocSinhForm() {
         initComponents();
         stt = 1;
-        data = readJSONFile();
+        data = XuLyFile.readJSONFile();
         model = (DefaultTableModel) tblBangDiem.getModel();
         fillTable();
     }
@@ -81,7 +66,7 @@ public class NhapDiemChoHocSinhForm extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblBangDiem = new javax.swing.JTable();
         btnThem = new javax.swing.JButton();
-        btnXoa = new javax.swing.JButton();
+        btnLamTrong = new javax.swing.JButton();
         btnCapNhat = new javax.swing.JButton();
         btnXuatFileJSON = new javax.swing.JButton();
         btnSapXep = new javax.swing.JButton();
@@ -106,7 +91,7 @@ public class NhapDiemChoHocSinhForm extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(469, 469, 469)
                 .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(580, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -191,13 +176,13 @@ public class NhapDiemChoHocSinhForm extends javax.swing.JFrame {
         });
         jPanel2.add(btnThem, new org.netbeans.lib.awtextra.AbsoluteConstraints(67, 368, -1, 40));
 
-        btnXoa.setText("Xoá");
-        btnXoa.addActionListener(new java.awt.event.ActionListener() {
+        btnLamTrong.setText("Làm Trống");
+        btnLamTrong.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnXoaActionPerformed(evt);
+                btnLamTrongActionPerformed(evt);
             }
         });
-        jPanel2.add(btnXoa, new org.netbeans.lib.awtextra.AbsoluteConstraints(179, 368, 90, 40));
+        jPanel2.add(btnLamTrong, new org.netbeans.lib.awtextra.AbsoluteConstraints(179, 368, 90, 40));
 
         btnCapNhat.setText("Cập Nhật");
         btnCapNhat.addActionListener(new java.awt.event.ActionListener() {
@@ -235,52 +220,24 @@ public class NhapDiemChoHocSinhForm extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap())
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 436, Short.MAX_VALUE))
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 518, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    static List<DiemCuaHS> readJSONFile() {
-        FileReader fr = null;
-        List<DiemCuaHS> data2 = new ArrayList<>();
-        try {
-            fr = new FileReader(JSON_PATH);
-            Gson gson = new Gson();
-
-            java.lang.reflect.Type type = new TypeToken<List<DiemCuaHS>>(){}.getType();
-            data2 = gson.fromJson(fr, type);
-
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(NhapDiemChoHocSinhForm.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            if (fr != null) {
-                try {
-                    fr.close();
-                } catch (IOException ex) {
-                    Logger.getLogger(NhapDiemChoHocSinhForm.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        }
-        return data2;
-    }
-    
-    static void fillTable(){
+    static void fillTable() {
         for (DiemCuaHS item : data) {
             DiemCuaHS hs = item;
             model.addRow(new Object[]{
@@ -300,7 +257,7 @@ public class NhapDiemChoHocSinhForm extends javax.swing.JFrame {
                 hs.getHocLuc(),});
         }
     }
-    
+
     private void fillToJTable() {
         if (data != null) {
             DiemCuaHS hs = data.get(data.size() - 1);
@@ -323,28 +280,51 @@ public class NhapDiemChoHocSinhForm extends javax.swing.JFrame {
     }
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-        String mahs = txtMaHS.getText();
-        List<DiemTungMon> TCM = new ArrayList<>();
-        TCM.add(new DiemTungMon(Double.parseDouble(txtToan.getText())));
-        TCM.add(new DiemTungMon(Double.parseDouble(txtLy.getText())));
-        TCM.add(new DiemTungMon(Double.parseDouble(txtHoa.getText())));
-        TCM.add(new DiemTungMon(Double.parseDouble(txtSinh.getText())));
-        TCM.add(new DiemTungMon(Double.parseDouble(txtTin.getText())));
-        TCM.add(new DiemTungMon(Double.parseDouble(txtCongNghe.getText())));
-        TCM.add(new DiemTungMon(Double.parseDouble(txtNguVan.getText())));
-        TCM.add(new DiemTungMon(Double.parseDouble(txtDia.getText())));
-        TCM.add(new DiemTungMon(Double.parseDouble(txtSu.getText())));
-        TCM.add(new DiemTungMon(Double.parseDouble(txtGDCD.getText())));
 
-        DiemCuaHS dchs = new DiemCuaHS(mahs);
-        dchs.setTatCaMon(TCM);
+        try {
+            String mahs = txtMaHS.getText();
+            List<DiemTungMon> TCM = new ArrayList<>();
+            TCM.add(new DiemTungMon(Double.parseDouble(txtToan.getText())));
+            TCM.add(new DiemTungMon(Double.parseDouble(txtLy.getText())));
+            TCM.add(new DiemTungMon(Double.parseDouble(txtHoa.getText())));
+            TCM.add(new DiemTungMon(Double.parseDouble(txtSinh.getText())));
+            TCM.add(new DiemTungMon(Double.parseDouble(txtTin.getText())));
+            TCM.add(new DiemTungMon(Double.parseDouble(txtCongNghe.getText())));
+            TCM.add(new DiemTungMon(Double.parseDouble(txtNguVan.getText())));
+            TCM.add(new DiemTungMon(Double.parseDouble(txtDia.getText())));
+            TCM.add(new DiemTungMon(Double.parseDouble(txtSu.getText())));
+            TCM.add(new DiemTungMon(Double.parseDouble(txtGDCD.getText())));
 
-        data.add(dchs);
-        fillToJTable();
-        btnXoaActionPerformed(evt);
+            DiemCuaHS dchs = new DiemCuaHS(mahs);
+            dchs.setTatCaMon(TCM);
+
+            int ks = 0;
+            for (DiemCuaHS item : data) {
+                if (item.getMaHS().equals(dchs.getMaHS())) {
+                    JOptionPane.showMessageDialog(this, "Học Sinh Đã Tồn Tại", "CẢNH BÁO!!!", JOptionPane.ERROR_MESSAGE);
+                    btnLamTrongActionPerformed(evt);
+                    break;
+                } else {
+                    ks++;
+                }
+            }
+            if (ks == data.size()) {
+                if (dchs.checkdiem()) {
+                    data.add(dchs);
+                    fillToJTable();
+                    btnLamTrongActionPerformed(evt);
+                } else {
+                    JOptionPane.showMessageDialog(this, "Điểm Không Hợp Lệ", "CẢNH BÁO!!!", JOptionPane.ERROR_MESSAGE);
+                    btnLamTrongActionPerformed(evt);
+                }
+            }
+        } catch (java.lang.NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "Định dạng không hợp lệ", "CẢNH BÁO!!!", JOptionPane.ERROR_MESSAGE);
+            btnLamTrongActionPerformed(evt);
+        }
     }//GEN-LAST:event_btnThemActionPerformed
 
-    private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
+    private void btnLamTrongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLamTrongActionPerformed
         txtMaHS.setText("");
         txtToan.setText("");
         txtLy.setText("");
@@ -356,7 +336,7 @@ public class NhapDiemChoHocSinhForm extends javax.swing.JFrame {
         txtDia.setText("");
         txtSu.setText("");
         txtGDCD.setText("");
-    }//GEN-LAST:event_btnXoaActionPerformed
+    }//GEN-LAST:event_btnLamTrongActionPerformed
 
     private void tblBangDiemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblBangDiemMouseClicked
         selectedRowIndex = tblBangDiem.getSelectedRow();
@@ -390,36 +370,50 @@ public class NhapDiemChoHocSinhForm extends javax.swing.JFrame {
     }//GEN-LAST:event_tblBangDiemMouseClicked
 
     private void btnCapNhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCapNhatActionPerformed
-        String mahs = txtMaHS.getText();
-        List<DiemTungMon> TCM = new ArrayList<>();
-        TCM.add(new DiemTungMon(Double.parseDouble(txtToan.getText())));
-        TCM.add(new DiemTungMon(Double.parseDouble(txtLy.getText())));
-        TCM.add(new DiemTungMon(Double.parseDouble(txtHoa.getText())));
-        TCM.add(new DiemTungMon(Double.parseDouble(txtSinh.getText())));
-        TCM.add(new DiemTungMon(Double.parseDouble(txtTin.getText())));
-        TCM.add(new DiemTungMon(Double.parseDouble(txtCongNghe.getText())));
-        TCM.add(new DiemTungMon(Double.parseDouble(txtNguVan.getText())));
-        TCM.add(new DiemTungMon(Double.parseDouble(txtDia.getText())));
-        TCM.add(new DiemTungMon(Double.parseDouble(txtSu.getText())));
-        TCM.add(new DiemTungMon(Double.parseDouble(txtGDCD.getText())));
+        try {
+            String mahs = txtMaHS.getText();
+            List<DiemTungMon> TCM = new ArrayList<>();
+            TCM.add(new DiemTungMon(Double.parseDouble(txtToan.getText())));
+            TCM.add(new DiemTungMon(Double.parseDouble(txtLy.getText())));
+            TCM.add(new DiemTungMon(Double.parseDouble(txtHoa.getText())));
+            TCM.add(new DiemTungMon(Double.parseDouble(txtSinh.getText())));
+            TCM.add(new DiemTungMon(Double.parseDouble(txtTin.getText())));
+            TCM.add(new DiemTungMon(Double.parseDouble(txtCongNghe.getText())));
+            TCM.add(new DiemTungMon(Double.parseDouble(txtNguVan.getText())));
+            TCM.add(new DiemTungMon(Double.parseDouble(txtDia.getText())));
+            TCM.add(new DiemTungMon(Double.parseDouble(txtSu.getText())));
+            TCM.add(new DiemTungMon(Double.parseDouble(txtGDCD.getText())));
 
-        DiemCuaHS dchs = new DiemCuaHS(mahs);
-        data.set(selectedRowIndex, dchs);
-        dchs.setTatCaMon(TCM);
+            DiemCuaHS dchs = new DiemCuaHS(mahs);
+            data.set(selectedRowIndex, dchs);
+            dchs.setTatCaMon(TCM);
 
-        model.setValueAt(dchs.getMaHS(), selectedRowIndex, 1);
-        model.setValueAt(dchs.getTatCaMon().get(0).getDiem_cac_mon(), selectedRowIndex, 2);
-        model.setValueAt(dchs.getTatCaMon().get(1).getDiem_cac_mon(), selectedRowIndex, 3);
-        model.setValueAt(dchs.getTatCaMon().get(2).getDiem_cac_mon(), selectedRowIndex, 4);
-        model.setValueAt(dchs.getTatCaMon().get(3).getDiem_cac_mon(), selectedRowIndex, 5);
-        model.setValueAt(dchs.getTatCaMon().get(4).getDiem_cac_mon(), selectedRowIndex, 6);
-        model.setValueAt(dchs.getTatCaMon().get(5).getDiem_cac_mon(), selectedRowIndex, 7);
-        model.setValueAt(dchs.getTatCaMon().get(6).getDiem_cac_mon(), selectedRowIndex, 8);
-        model.setValueAt(dchs.getTatCaMon().get(7).getDiem_cac_mon(), selectedRowIndex, 9);
-        model.setValueAt(dchs.getTatCaMon().get(8).getDiem_cac_mon(), selectedRowIndex, 10);
-        model.setValueAt(dchs.getTatCaMon().get(9).getDiem_cac_mon(), selectedRowIndex, 11);
-        model.setValueAt(dchs.getDiemTBmon(), selectedRowIndex, 12);
-        model.setValueAt(dchs.getHocLuc(), selectedRowIndex, 13);
+            if (model.getValueAt(selectedRowIndex, 0).equals(dchs.getMaHS())) {
+                if (dchs.checkdiem()) {
+                    data.add(dchs);
+                    model.setValueAt(dchs.getMaHS(), selectedRowIndex, 1);
+                    model.setValueAt(dchs.getTatCaMon().get(0).getDiem_cac_mon(), selectedRowIndex, 2);
+                    model.setValueAt(dchs.getTatCaMon().get(1).getDiem_cac_mon(), selectedRowIndex, 3);
+                    model.setValueAt(dchs.getTatCaMon().get(2).getDiem_cac_mon(), selectedRowIndex, 4);
+                    model.setValueAt(dchs.getTatCaMon().get(3).getDiem_cac_mon(), selectedRowIndex, 5);
+                    model.setValueAt(dchs.getTatCaMon().get(4).getDiem_cac_mon(), selectedRowIndex, 6);
+                    model.setValueAt(dchs.getTatCaMon().get(5).getDiem_cac_mon(), selectedRowIndex, 7);
+                    model.setValueAt(dchs.getTatCaMon().get(6).getDiem_cac_mon(), selectedRowIndex, 8);
+                    model.setValueAt(dchs.getTatCaMon().get(7).getDiem_cac_mon(), selectedRowIndex, 9);
+                    model.setValueAt(dchs.getTatCaMon().get(8).getDiem_cac_mon(), selectedRowIndex, 10);
+                    model.setValueAt(dchs.getTatCaMon().get(9).getDiem_cac_mon(), selectedRowIndex, 11);
+                    model.setValueAt(dchs.getDiemTBmon(), selectedRowIndex, 12);
+                    model.setValueAt(dchs.getHocLuc(), selectedRowIndex, 13);
+                    btnLamTrongActionPerformed(evt);
+                } else {
+                    JOptionPane.showMessageDialog(this, "Điểm Không Hợp Lệ", "CẢNH BÁO!!!", JOptionPane.ERROR_MESSAGE);
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Không Được Sửa Mã Sinh Viên", "CẢNH BÁO!!!", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (java.lang.NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "Định dạng không hợp lệ", "CẢNH BÁO!!!", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btnCapNhatActionPerformed
 
     private void btnXuatFileJSONActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXuatFileJSONActionPerformed
@@ -427,50 +421,12 @@ public class NhapDiemChoHocSinhForm extends javax.swing.JFrame {
     }//GEN-LAST:event_btnXuatFileJSONActionPerformed
 
     private void btnSapXepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSapXepActionPerformed
-        DiemCuaHSController.compareSubject(data, 10);
-        model.setRowCount(0);
-        int stt2 = 1;
-        for (DiemCuaHS item : data) {
-            DiemCuaHS hs = item;
-            model.addRow(new Object[]{
-                stt2++,
-                hs.getMaHS(),
-                hs.getTatCaMon().get(0).getDiem_cac_mon(),
-                hs.getTatCaMon().get(1).getDiem_cac_mon(),
-                hs.getTatCaMon().get(2).getDiem_cac_mon(),
-                hs.getTatCaMon().get(3).getDiem_cac_mon(),
-                hs.getTatCaMon().get(4).getDiem_cac_mon(),
-                hs.getTatCaMon().get(5).getDiem_cac_mon(),
-                hs.getTatCaMon().get(6).getDiem_cac_mon(),
-                hs.getTatCaMon().get(7).getDiem_cac_mon(),
-                hs.getTatCaMon().get(8).getDiem_cac_mon(),
-                hs.getTatCaMon().get(9).getDiem_cac_mon(),
-                hs.getDiemTBmon(),
-                hs.getHocLuc(),});
-        }
+        SapXepDiemHSForm sx = new SapXepDiemHSForm();
+        sx.setVisible(true);
+        this.setVisible(false);
+        sx.pack();
+        sx.setLocationRelativeTo(null);
     }//GEN-LAST:event_btnSapXepActionPerformed
-
-    public <E> void writeJSONFile(List<E> list) {
-        FileWriter fw = null;
-        try {
-            fw = new FileWriter(JSON_PATH);
-            Gson gson = new Gson();
-
-            gson.toJson(list, fw);
-        } catch (IOException ex) {
-            Logger.getLogger(DiemCuaHSController.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            if (fw != null) {
-                try {
-                    fw.flush();
-                    fw.close();
-                } catch (IOException ex) {
-                    Logger.getLogger(DiemCuaHSController.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        }
-
-    }
 
     private void btnLocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLocActionPerformed
         LocDiemHocSinh loc = new LocDiemHocSinh();
@@ -478,7 +434,6 @@ public class NhapDiemChoHocSinhForm extends javax.swing.JFrame {
         this.setVisible(false);
         loc.pack();
         loc.setLocationRelativeTo(null);
-        writeJSONFile(data);
     }//GEN-LAST:event_btnLocActionPerformed
 
     /**
@@ -518,10 +473,10 @@ public class NhapDiemChoHocSinhForm extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCapNhat;
+    private javax.swing.JButton btnLamTrong;
     private javax.swing.JButton btnLoc;
     private javax.swing.JButton btnSapXep;
     private javax.swing.JButton btnThem;
-    private javax.swing.JButton btnXoa;
     private javax.swing.JButton btnXuatFileJSON;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
