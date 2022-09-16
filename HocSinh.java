@@ -1,5 +1,6 @@
 package com.actvn.qldiemhsthpt;
 
+import java.util.Date;
 import java.util.Scanner;
 
 public class HocSinh {
@@ -8,19 +9,23 @@ public class HocSinh {
     private String hoVaTenDem;
     private String ten;
     private String lop;
-    private String sinhNhat;
+    private Date sinhNhat;
     private String queQuan;
 
     public HocSinh() {
     }
 
-    public HocSinh(String MaHS, String hoVaTenDem, String ten, String lop, String sinhNhat, String queQuan) {
+    public HocSinh(String MaHS, String hoVaTenDem, String ten, String lop, Date sinhNhat, String queQuan) {
         this.MaHS = MaHS;
         this.hoVaTenDem = hoVaTenDem;
         this.ten = ten;
         this.lop = lop;
         this.sinhNhat = sinhNhat;
         this.queQuan = queQuan;
+    }
+
+    HocSinh(String maHS, String hoTen, String lop, Date ngaysinh, String queQuan) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     public String getMaHS() {
@@ -55,11 +60,11 @@ public class HocSinh {
         this.lop = lop;
     }
 
-    public String getSinhNhat() {
+    public Date getSinhNhat() {
         return sinhNhat;
     }
 
-    public void setSinhNhat(String sinhNhat) {
+    public void setSinhNhat(Date sinhNhat) {
         this.sinhNhat = sinhNhat;
     }
 
@@ -94,6 +99,11 @@ public class HocSinh {
         return name;
     }
 
+    @Override
+    public String toString() {
+        return "HocSinh{" + "MaHS=" + MaHS + ", hoVaTenDem=" + hoVaTenDem + ", ten=" + ten + ", lop=" + lop + ", sinhNhat=" + sinhNhat + ", queQuan=" + queQuan + '}';
+    }
+
     public void nhapThongTin() {
         Scanner sc = new Scanner(System.in);
         //nhap ma hoc sinh
@@ -117,7 +127,7 @@ public class HocSinh {
         setLop(sc.nextLine());
         //ngay sinh
         System.out.println("Ngay sinh: ");
-        setSinhNhat(sc.nextLine());
+        
         //nhap que quan
         System.out.println("Que quan: ");
         setQueQuan(sc.nextLine());
@@ -147,9 +157,11 @@ public class HocSinh {
             case 2 ->
                 setLop(noiDung);
             case 3 ->
-                setSinhNhat(noiDung);
+                setQueQuan(noiDung);
             case 4 ->
                 setQueQuan(noiDung);
         }
     }
 }
+
+
