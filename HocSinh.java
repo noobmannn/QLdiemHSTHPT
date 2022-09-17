@@ -1,27 +1,35 @@
 package com.actvn.qldiemhsthpt;
 
-import java.util.Scanner;
-
 public class HocSinh {
 
     private String MaHS;
     private String hoVaTenDem;
     private String ten;
     private String lop;
-    private String sinhNhat;
+    private int GioiTinh;
+    private String sinhNhat;    
     private String queQuan;
 
     public HocSinh() {
     }
 
-    public HocSinh(String MaHS, String hoVaTenDem, String ten, String lop, String sinhNhat, String queQuan) {
+    public HocSinh(String MaHS, String hoVaTenDem, String ten, String lop, int GioiTinh, String sinhNhat, String queQuan) {
         this.MaHS = MaHS;
         this.hoVaTenDem = hoVaTenDem;
         this.ten = ten;
         this.lop = lop;
+        this.GioiTinh = GioiTinh;
         this.sinhNhat = sinhNhat;
         this.queQuan = queQuan;
     }
+
+    public int getGioiTinh() {
+        return GioiTinh;
+    }
+
+    public void setGioiTinh(int GioiTinh) {
+        this.GioiTinh = GioiTinh;
+    }   
 
     public String getMaHS() {
         return MaHS;
@@ -69,87 +77,5 @@ public class HocSinh {
 
     public void setQueQuan(String queQuan) {
         this.queQuan = queQuan;
-    }
-
-    private String UpperFirstChar(String name) {
-        //để chuyển đổi name thành một mảng kiểu char
-        char[] charArray = name.toCharArray();
-        boolean foundSpace = true;
-        //sử dụng vòng lặp for để duyệt các phần tử trong charArray
-        for (int i = 0; i < charArray.length; i++) {
-            // nếu phần tử trong mảng là một chữ cái
-            if (Character.isLetter(charArray[i])) {
-                // kiểm tra khoảng trắng có trước chữ cái
-                if (foundSpace) {
-                    //đổi chữ cái thành chữ in hoa
-                    charArray[i] = Character.toUpperCase(charArray[i]);
-                    foundSpace = false;
-                }
-            } else {
-                foundSpace = true;
-            }
-        }
-        // chuyển đổi mảng char thành string
-        name = String.valueOf(charArray);
-        return name;
-    }
-
-    public void nhapThongTin() {
-        Scanner sc = new Scanner(System.in);
-        //nhap ma hoc sinh
-        System.out.println("Ma hoc sinh: ");
-        setMaHS(sc.nextLine());
-        //nhap ho va ten day du
-        System.out.println("Nhap ho va ten cua hoc sinh: ");
-        String fullName = sc.nextLine();
-        //tach ho ten day du ra thanh ho va ten
-        String item[] = fullName.split(" ");
-        String lastName = item[item.length - 1];
-        String firstName = "";
-        for (int i = 0; i < item.length - 1; i++) {
-            firstName += item[i];
-            firstName += " ";
-        }
-        setHoVaTenDem(firstName);
-        setTen(lastName);
-        //nhap lop
-        System.out.println("Lop: ");
-        setLop(sc.nextLine());
-        //ngay sinh
-        System.out.println("Ngay sinh: ");
-        setSinhNhat(sc.nextLine());
-        //nhap que quan
-        System.out.println("Que quan: ");
-        setQueQuan(sc.nextLine());
-    }
-
-    public void xuatThongTin() {
-        System.out.println("Ma hoc sinh: " + MaHS);
-        System.out.println("Ho va ten: " + UpperFirstChar(hoVaTenDem) + UpperFirstChar(ten));
-        System.out.println("Lop: " + lop);
-        System.out.println("Ngay sinh: " + sinhNhat);
-        System.out.println("Que quan: " + UpperFirstChar(queQuan));
-    }
-
-    public void suaThongTin(int thongTin, String noiDung) {
-        switch (thongTin) {
-            case 1 -> {
-                String item[] = noiDung.split(" ");
-                String lastName = item[item.length - 1];
-                String firstName = "";
-                for (int i = 0; i < item.length - 1; i++) {
-                    firstName += item[i];
-                    firstName += " ";
-                }
-                setHoVaTenDem(firstName);
-                setTen(lastName);
-            }
-            case 2 ->
-                setLop(noiDung);
-            case 3 ->
-                setSinhNhat(noiDung);
-            case 4 ->
-                setQueQuan(noiDung);
-        }
     }
 }

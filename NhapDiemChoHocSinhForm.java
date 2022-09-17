@@ -1,10 +1,12 @@
 package com.actvn.qldiemhsthpt;
 
-import java.io.File;
+import static com.actvn.qldiemhsthpt.XuLyFile.JSON_DIEM_PATH;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 
 public class NhapDiemChoHocSinhForm extends javax.swing.JFrame {
 
@@ -12,10 +14,8 @@ public class NhapDiemChoHocSinhForm extends javax.swing.JFrame {
     static int stt;
     static DefaultTableModel model;
     int selectedRowIndex;
-
-    private static final String CURRENT_DIR = System.getProperty("user.dir");
-    private static final String SEPARATOR = File.separator;
-    private static final String JSON_PATH = CURRENT_DIR + SEPARATOR + "data" + SEPARATOR + "DiemCuaHS.json";
+    static List<HocSinh> datahs;
+    List<String> listMaHS;
 
     /**
      * Creates new form NhapDiemChoHocSinhForm
@@ -23,8 +23,10 @@ public class NhapDiemChoHocSinhForm extends javax.swing.JFrame {
     public NhapDiemChoHocSinhForm() {
         initComponents();
         stt = 1;
-        data = XuLyFile.readJSONFile();
+        data = XuLyFile.readJSONFile(JSON_DIEM_PATH);
         model = (DefaultTableModel) tblBangDiem.getModel();
+        datahs = XuLyFile.readJSONFileTT(com.actvn.qldiemhsthpt.XuLyFile.JSON_THONGTIN_PATH);
+        listMaHS = createStringListData(datahs);
         fillTable();
     }
 
@@ -67,15 +69,24 @@ public class NhapDiemChoHocSinhForm extends javax.swing.JFrame {
         tblBangDiem = new javax.swing.JTable();
         btnThem = new javax.swing.JButton();
         btnLamTrong = new javax.swing.JButton();
-        btnCapNhat = new javax.swing.JButton();
+        btnSuaDiem = new javax.swing.JButton();
         btnXuatFileJSON = new javax.swing.JButton();
         btnSapXep = new javax.swing.JButton();
         btnLoc = new javax.swing.JButton();
+        btnXoa = new javax.swing.JButton();
+        btnTimKiem = new javax.swing.JButton();
+        txtTimKiem = new javax.swing.JTextField();
+        jLabel14 = new javax.swing.JLabel();
+        btnquaylai = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setAlwaysOnTop(true);
         setAutoRequestFocus(false);
         setBackground(new java.awt.Color(255, 255, 255));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(51, 102, 255));
         jPanel1.setToolTipText("");
@@ -184,13 +195,13 @@ public class NhapDiemChoHocSinhForm extends javax.swing.JFrame {
         });
         jPanel2.add(btnLamTrong, new org.netbeans.lib.awtextra.AbsoluteConstraints(179, 368, 90, 40));
 
-        btnCapNhat.setText("Cập Nhật");
-        btnCapNhat.addActionListener(new java.awt.event.ActionListener() {
+        btnSuaDiem.setText("Sửa Điểm");
+        btnSuaDiem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCapNhatActionPerformed(evt);
+                btnSuaDiemActionPerformed(evt);
             }
         });
-        jPanel2.add(btnCapNhat, new org.netbeans.lib.awtextra.AbsoluteConstraints(312, 368, 110, 40));
+        jPanel2.add(btnSuaDiem, new org.netbeans.lib.awtextra.AbsoluteConstraints(312, 368, 110, 40));
 
         btnXuatFileJSON.setText("Xuất ra File JSON");
         btnXuatFileJSON.addActionListener(new java.awt.event.ActionListener() {
@@ -216,6 +227,34 @@ public class NhapDiemChoHocSinhForm extends javax.swing.JFrame {
         });
         jPanel2.add(btnLoc, new org.netbeans.lib.awtextra.AbsoluteConstraints(747, 368, 80, 40));
 
+        btnXoa.setText("Xoá");
+        btnXoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXoaActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btnXoa, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 370, 90, 40));
+
+        btnTimKiem.setText("Tìm");
+        btnTimKiem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTimKiemActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btnTimKiem, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 460, -1, -1));
+        jPanel2.add(txtTimKiem, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 460, 100, -1));
+
+        jLabel14.setText("Nhập mã sinh viên cần tìm kiếm:");
+        jPanel2.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 460, 180, 30));
+
+        btnquaylai.setText("Quay Lại");
+        btnquaylai.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnquaylaiActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btnquaylai, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 460, 100, 30));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -237,7 +276,16 @@ public class NhapDiemChoHocSinhForm extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    static List<String> createStringListData(List<HocSinh> datahs) {
+        List<String> mahs = new ArrayList<>();
+        for (HocSinh item : datahs) {
+            mahs.add(item.getMaHS());
+        }
+        return mahs;
+    }
+
     static void fillTable() {
+        stt = 1;
         for (DiemCuaHS item : data) {
             DiemCuaHS hs = item;
             model.addRow(new Object[]{
@@ -279,6 +327,15 @@ public class NhapDiemChoHocSinhForm extends javax.swing.JFrame {
         }
     }
 
+    private boolean checkMaHS(List<String> mahs, String s) {
+        for (String item : mahs) {
+            if (item.equals(s)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
 
         try {
@@ -298,25 +355,29 @@ public class NhapDiemChoHocSinhForm extends javax.swing.JFrame {
             DiemCuaHS dchs = new DiemCuaHS(mahs);
             dchs.setTatCaMon(TCM);
 
-            int ks = 0;
-            for (DiemCuaHS item : data) {
-                if (item.getMaHS().equals(dchs.getMaHS())) {
-                    JOptionPane.showMessageDialog(this, "Học Sinh Đã Tồn Tại", "CẢNH BÁO!!!", JOptionPane.ERROR_MESSAGE);
-                    btnLamTrongActionPerformed(evt);
-                    break;
-                } else {
-                    ks++;
+            if (checkMaHS(listMaHS, mahs)) {
+                int ks = 0;
+                for (DiemCuaHS item : data) {
+                    if (item.getMaHS().equals(dchs.getMaHS())) {
+                        JOptionPane.showMessageDialog(this, "Học Sinh Đã Tồn Tại", "CẢNH BÁO!!!", JOptionPane.ERROR_MESSAGE);
+                        btnLamTrongActionPerformed(evt);
+                        break;
+                    } else {
+                        ks++;
+                    }
                 }
-            }
-            if (ks == data.size()) {
-                if (dchs.checkdiem()) {
-                    data.add(dchs);
-                    fillToJTable();
-                    btnLamTrongActionPerformed(evt);
-                } else {
-                    JOptionPane.showMessageDialog(this, "Điểm Không Hợp Lệ", "CẢNH BÁO!!!", JOptionPane.ERROR_MESSAGE);
-                    btnLamTrongActionPerformed(evt);
+                if (ks == data.size()) {
+                    if (dchs.checkdiem()) {
+                        data.add(dchs);
+                        fillToJTable();
+                        btnLamTrongActionPerformed(evt);
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Điểm Không Hợp Lệ", "CẢNH BÁO!!!", JOptionPane.ERROR_MESSAGE);
+                        btnLamTrongActionPerformed(evt);
+                    }
                 }
+            } else {
+                JOptionPane.showMessageDialog(this, "Học Sinh Không Tồn Tại!!!", "CẢNH BÁO!!!", JOptionPane.ERROR_MESSAGE);
             }
         } catch (java.lang.NumberFormatException ex) {
             JOptionPane.showMessageDialog(this, "Định dạng không hợp lệ", "CẢNH BÁO!!!", JOptionPane.ERROR_MESSAGE);
@@ -369,7 +430,7 @@ public class NhapDiemChoHocSinhForm extends javax.swing.JFrame {
 
     }//GEN-LAST:event_tblBangDiemMouseClicked
 
-    private void btnCapNhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCapNhatActionPerformed
+    private void btnSuaDiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaDiemActionPerformed
         try {
             String mahs = txtMaHS.getText();
             List<DiemTungMon> TCM = new ArrayList<>();
@@ -388,10 +449,8 @@ public class NhapDiemChoHocSinhForm extends javax.swing.JFrame {
             data.set(selectedRowIndex, dchs);
             dchs.setTatCaMon(TCM);
 
-            if (model.getValueAt(selectedRowIndex, 0).equals(dchs.getMaHS())) {
+            if (model.getValueAt(selectedRowIndex, 1).equals(dchs.getMaHS())) {
                 if (dchs.checkdiem()) {
-                    data.add(dchs);
-                    model.setValueAt(dchs.getMaHS(), selectedRowIndex, 1);
                     model.setValueAt(dchs.getTatCaMon().get(0).getDiem_cac_mon(), selectedRowIndex, 2);
                     model.setValueAt(dchs.getTatCaMon().get(1).getDiem_cac_mon(), selectedRowIndex, 3);
                     model.setValueAt(dchs.getTatCaMon().get(2).getDiem_cac_mon(), selectedRowIndex, 4);
@@ -410,17 +469,19 @@ public class NhapDiemChoHocSinhForm extends javax.swing.JFrame {
                 }
             } else {
                 JOptionPane.showMessageDialog(this, "Không Được Sửa Mã Sinh Viên", "CẢNH BÁO!!!", JOptionPane.ERROR_MESSAGE);
+                txtMaHS.setText(model.getValueAt(selectedRowIndex, 1).toString());
             }
         } catch (java.lang.NumberFormatException ex) {
             JOptionPane.showMessageDialog(this, "Định dạng không hợp lệ", "CẢNH BÁO!!!", JOptionPane.ERROR_MESSAGE);
         }
-    }//GEN-LAST:event_btnCapNhatActionPerformed
+    }//GEN-LAST:event_btnSuaDiemActionPerformed
 
     private void btnXuatFileJSONActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXuatFileJSONActionPerformed
-        DiemCuaHSController.writeJSONFile(data);
+        XuLyFile.writeJSONFile(data, com.actvn.qldiemhsthpt.XuLyFile.JSON_DIEM_PATH);
     }//GEN-LAST:event_btnXuatFileJSONActionPerformed
 
     private void btnSapXepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSapXepActionPerformed
+        btnXuatFileJSONActionPerformed(evt);
         SapXepDiemHSForm sx = new SapXepDiemHSForm();
         sx.setVisible(true);
         this.setVisible(false);
@@ -429,12 +490,42 @@ public class NhapDiemChoHocSinhForm extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSapXepActionPerformed
 
     private void btnLocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLocActionPerformed
+        btnXuatFileJSONActionPerformed(evt);
         LocDiemHocSinh loc = new LocDiemHocSinh();
         loc.setVisible(true);
         this.setVisible(false);
         loc.pack();
         loc.setLocationRelativeTo(null);
     }//GEN-LAST:event_btnLocActionPerformed
+
+    private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
+        btnXuatFileJSONActionPerformed(evt);
+        data.remove(selectedRowIndex);
+        model.setRowCount(0);
+        fillTable();
+        btnLamTrongActionPerformed(evt);
+    }//GEN-LAST:event_btnXoaActionPerformed
+
+    private void btnTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemActionPerformed
+        TableRowSorter<DefaultTableModel> tk = new TableRowSorter<>(model);
+        tblBangDiem.setRowSorter(tk);
+        tk.setRowFilter(RowFilter.regexFilter(txtTimKiem.getText()));
+    }//GEN-LAST:event_btnTimKiemActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        MainMenu loc = new MainMenu();
+        loc.setVisible(true);
+        this.setVisible(false);
+        loc.pack();
+        loc.setLocationRelativeTo(null);
+    }//GEN-LAST:event_formWindowClosing
+
+    private void btnquaylaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnquaylaiActionPerformed
+        txtTimKiem.setText("");
+        TableRowSorter<DefaultTableModel> tk = new TableRowSorter<>(model);
+        tblBangDiem.setRowSorter(tk);
+        tk.setRowFilter(RowFilter.regexFilter(txtTimKiem.getText()));
+    }//GEN-LAST:event_btnquaylaiActionPerformed
 
     /**
      * @param args the command line arguments
@@ -472,17 +563,21 @@ public class NhapDiemChoHocSinhForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCapNhat;
     private javax.swing.JButton btnLamTrong;
     private javax.swing.JButton btnLoc;
     private javax.swing.JButton btnSapXep;
+    private javax.swing.JButton btnSuaDiem;
     private javax.swing.JButton btnThem;
+    private javax.swing.JButton btnTimKiem;
+    private javax.swing.JButton btnXoa;
     private javax.swing.JButton btnXuatFileJSON;
+    private javax.swing.JButton btnquaylai;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -504,6 +599,7 @@ public class NhapDiemChoHocSinhForm extends javax.swing.JFrame {
     private javax.swing.JTextField txtNguVan;
     private javax.swing.JTextField txtSinh;
     private javax.swing.JTextField txtSu;
+    private javax.swing.JTextField txtTimKiem;
     private javax.swing.JTextField txtTin;
     private javax.swing.JTextField txtToan;
     // End of variables declaration//GEN-END:variables

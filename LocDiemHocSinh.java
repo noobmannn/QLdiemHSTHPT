@@ -1,13 +1,12 @@
 package com.actvn.qldiemhsthpt;
 
-
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
 public class LocDiemHocSinh extends javax.swing.JFrame {
 
-    List<DiemCuaHS> data;
+    List<DiemCuaHS> data, subList;
     DefaultTableModel model;
     DiemCuaHS diemcuahs;
 
@@ -16,7 +15,7 @@ public class LocDiemHocSinh extends javax.swing.JFrame {
      */
     public LocDiemHocSinh() {
         initComponents();
-        data = XuLyFile.readJSONFile();
+        data = XuLyFile.readJSONFile(com.actvn.qldiemhsthpt.XuLyFile.JSON_DIEM_PATH);
         model = (DefaultTableModel) tblBangLoc.getModel();
         diemcuahs = null;
     }
@@ -42,6 +41,8 @@ public class LocDiemHocSinh extends javax.swing.JFrame {
         btnHienThi2 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblBangLoc = new javax.swing.JTable();
+        jPanel4 = new javax.swing.JPanel();
+        btnXuatFile = new javax.swing.JButton();
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -152,6 +153,32 @@ public class LocDiemHocSinh extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tblBangLoc);
 
+        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
+
+        btnXuatFile.setText("Xuất File JSON");
+        btnXuatFile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXuatFileActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(266, 266, 266)
+                .addComponent(btnXuatFile, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnXuatFile, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -159,6 +186,7 @@ public class LocDiemHocSinh extends javax.swing.JFrame {
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jScrollPane1)
+            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -167,8 +195,9 @@ public class LocDiemHocSinh extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 354, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -197,7 +226,7 @@ public class LocDiemHocSinh extends javax.swing.JFrame {
 
     private void btnHienThi1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHienThi1ActionPerformed
         model.setRowCount(0);
-        List<DiemCuaHS> subList = new ArrayList<>();
+        subList = new ArrayList<>();
         switch (cbxHocLuc.getSelectedItem().toString()) {
             case "Giỏi" ->
                 subList = DiemCuaHSController.filterRanked(data, 1);
@@ -223,21 +252,25 @@ public class LocDiemHocSinh extends javax.swing.JFrame {
 
     private void btnHienThi2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHienThi2ActionPerformed
         model.setRowCount(0);
-        List<DiemCuaHS> subList1 = new ArrayList<>();
+        subList = new ArrayList<>();
         switch (cbxMonHoc.getSelectedItem().toString()) {
-            case "Toán" -> subList1 = DiemCuaHSController.filterSubject(data, 0);
-            case "Vật Lý" -> subList1 = DiemCuaHSController.filterSubject(data, 1);
-            case "Hoá Học" -> subList1 = DiemCuaHSController.filterSubject(data, 2);
-            case "Sinh Học" -> subList1 = DiemCuaHSController.filterSubject(data, 3);
-            case "Tin Học" -> subList1 = DiemCuaHSController.filterSubject(data, 4);
-            case "Công Nghệ" -> subList1 = DiemCuaHSController.filterSubject(data, 5);
-            case "Ngữ Văn" -> subList1 = DiemCuaHSController.filterSubject(data, 6);
-            case "Địa Lý" -> subList1 = DiemCuaHSController.filterSubject(data, 7);
-            case "Lịch Sử" -> subList1 = DiemCuaHSController.filterSubject(data, 8);
-            case "Giáo Dục Công Dân" -> subList1 = DiemCuaHSController.filterSubject(data, 9);
+            case "Toán" -> subList = DiemCuaHSController.filterSubject(data, 0);
+            case "Vật Lý" -> subList = DiemCuaHSController.filterSubject(data, 1);
+            case "Hoá Học" -> subList = DiemCuaHSController.filterSubject(data, 2);
+            case "Sinh Học" -> subList = DiemCuaHSController.filterSubject(data, 3);
+            case "Tin Học" -> subList = DiemCuaHSController.filterSubject(data, 4);
+            case "Công Nghệ" -> subList = DiemCuaHSController.filterSubject(data, 5);
+            case "Ngữ Văn" -> subList = DiemCuaHSController.filterSubject(data, 6);
+            case "Địa Lý" -> subList = DiemCuaHSController.filterSubject(data, 7);
+            case "Lịch Sử" -> subList = DiemCuaHSController.filterSubject(data, 8);
+            case "Giáo Dục Công Dân" -> subList = DiemCuaHSController.filterSubject(data, 9);
         }
-        fillTable(subList1);
+        fillTable(subList);
     }//GEN-LAST:event_btnHienThi2ActionPerformed
+
+    private void btnXuatFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXuatFileActionPerformed
+        XuLyFile.writeJSONFile(subList, com.actvn.qldiemhsthpt.XuLyFile.JSON_FILTER_PATH);
+    }//GEN-LAST:event_btnXuatFileActionPerformed
 
     /**
      * @param args the command line arguments
@@ -277,6 +310,7 @@ public class LocDiemHocSinh extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnHienThi1;
     private javax.swing.JButton btnHienThi2;
+    private javax.swing.JButton btnXuatFile;
     private javax.swing.JComboBox<String> cbxHocLuc;
     private javax.swing.JComboBox<String> cbxMonHoc;
     private javax.swing.JLabel jLabel1;
@@ -285,6 +319,7 @@ public class LocDiemHocSinh extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblBangLoc;
     // End of variables declaration//GEN-END:variables

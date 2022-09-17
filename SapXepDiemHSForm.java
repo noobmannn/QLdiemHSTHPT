@@ -7,7 +7,7 @@ import javax.swing.table.DefaultTableModel;
 
 public class SapXepDiemHSForm extends javax.swing.JFrame {
 
-    List<DiemCuaHS> data;
+    List<DiemCuaHS> data, subList;
     DefaultTableModel model;
     DiemCuaHS diemcuahs;
     /**
@@ -15,7 +15,7 @@ public class SapXepDiemHSForm extends javax.swing.JFrame {
      */
     public SapXepDiemHSForm() {
         initComponents();
-        data = XuLyFile.readJSONFile();
+        data = XuLyFile.readJSONFile(com.actvn.qldiemhsthpt.XuLyFile.JSON_DIEM_PATH);
         model = (DefaultTableModel) tblSapXep.getModel();
         diemcuahs = null;
     }
@@ -39,12 +39,15 @@ public class SapXepDiemHSForm extends javax.swing.JFrame {
         btnSapXep2 = new javax.swing.JToggleButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblSapXep = new javax.swing.JTable();
+        jPanel3 = new javax.swing.JPanel();
+        btnXuatFile = new javax.swing.JButton();
 
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
             }
         });
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(51, 102, 255));
 
@@ -68,6 +71,8 @@ public class SapXepDiemHSForm extends javax.swing.JFrame {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(23, Short.MAX_VALUE))
         );
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 653, -1));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -128,6 +133,8 @@ public class SapXepDiemHSForm extends javax.swing.JFrame {
                 .addContainerGap(35, Short.MAX_VALUE))
         );
 
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 75, -1, -1));
+
         tblSapXep.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -138,24 +145,35 @@ public class SapXepDiemHSForm extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tblSapXep);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jScrollPane1)
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 216, 653, -1));
+
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+
+        btnXuatFile.setText("Xuất File JSON");
+        btnXuatFile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXuatFileActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(251, 251, 251)
+                .addComponent(btnXuatFile, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(260, Short.MAX_VALUE))
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(12, Short.MAX_VALUE)
+                .addComponent(btnXuatFile, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
+
+        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 649, 647, 60));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -182,26 +200,26 @@ public class SapXepDiemHSForm extends javax.swing.JFrame {
     
     private void btnSapxep1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSapxep1ActionPerformed
         model.setRowCount(0);
-        List<DiemCuaHS> subList = DiemCuaHSController.compareSubject(data, 10);
+        subList = DiemCuaHSController.compareSubject(data, 10);
         fillTable(subList);
     }//GEN-LAST:event_btnSapxep1ActionPerformed
 
     private void btnSapXep2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSapXep2ActionPerformed
         model.setRowCount(0);
-        List<DiemCuaHS> subList1 = new ArrayList<>();
+        subList = new ArrayList<>();
         switch (cbxMonHoc.getSelectedItem().toString()) {
-            case "Toán" -> subList1 = DiemCuaHSController.compareSubject(data, 0);
-            case "Vật Lý" -> subList1 = DiemCuaHSController.compareSubject(data, 1);
-            case "Hoá Học" -> subList1 = DiemCuaHSController.compareSubject(data, 2);
-            case "Sinh Học" -> subList1 = DiemCuaHSController.compareSubject(data, 3);
-            case "Tin Học" -> subList1 = DiemCuaHSController.compareSubject(data, 4);
-            case "Công Nghệ" -> subList1 =  DiemCuaHSController.compareSubject(data, 5);
-            case "Ngữ Văn" -> subList1 = DiemCuaHSController.compareSubject(data, 6);
-            case "Địa Lý" -> subList1 = DiemCuaHSController.compareSubject(data, 7);
-            case "Lịch Sử" -> subList1 = DiemCuaHSController.compareSubject(data, 8);
-            case "Giáo Dục Công Dân" ->subList1 = DiemCuaHSController.compareSubject(data, 9);
+            case "Toán" -> subList = DiemCuaHSController.compareSubject(data, 0);
+            case "Vật Lý" -> subList = DiemCuaHSController.compareSubject(data, 1);
+            case "Hoá Học" -> subList = DiemCuaHSController.compareSubject(data, 2);
+            case "Sinh Học" -> subList = DiemCuaHSController.compareSubject(data, 3);
+            case "Tin Học" -> subList = DiemCuaHSController.compareSubject(data, 4);
+            case "Công Nghệ" -> subList =  DiemCuaHSController.compareSubject(data, 5);
+            case "Ngữ Văn" -> subList = DiemCuaHSController.compareSubject(data, 6);
+            case "Địa Lý" -> subList = DiemCuaHSController.compareSubject(data, 7);
+            case "Lịch Sử" -> subList = DiemCuaHSController.compareSubject(data, 8);
+            case "Giáo Dục Công Dân" ->subList = DiemCuaHSController.compareSubject(data, 9);
         }
-        fillTable(subList1);
+        fillTable(subList);
     }//GEN-LAST:event_btnSapXep2ActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
@@ -211,6 +229,10 @@ public class SapXepDiemHSForm extends javax.swing.JFrame {
         loc.pack();
         loc.setLocationRelativeTo(null);
     }//GEN-LAST:event_formWindowClosing
+
+    private void btnXuatFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXuatFileActionPerformed
+        XuLyFile.writeJSONFile(subList, com.actvn.qldiemhsthpt.XuLyFile.JSON_SORT_PATH);
+    }//GEN-LAST:event_btnXuatFileActionPerformed
 
     /**
      * @param args the command line arguments
@@ -250,12 +272,14 @@ public class SapXepDiemHSForm extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton btnSapXep2;
     private javax.swing.JToggleButton btnSapxep1;
+    private javax.swing.JButton btnXuatFile;
     private javax.swing.JComboBox<String> cbxMonHoc;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblSapXep;
     // End of variables declaration//GEN-END:variables

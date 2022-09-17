@@ -181,8 +181,13 @@ public class LoginFrame extends javax.swing.JFrame {
         if (sb.length() > 0) {
             JOptionPane.showMessageDialog(this, sb.toString(), "Cảnh báo", JOptionPane.WARNING_MESSAGE);
         } else {
-            if (taikhoan.equals("anhtuan22092003") && matkhau.equals("asdw12345.")) {
+            if (taikhoan.equals("manager") && matkhau.equals("manager")) {
                 JOptionPane.showMessageDialog(this, "ĐĂNG NHẬP THÀNH CÔNG", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                MainMenu m = new MainMenu();
+                m.setVisible(true);
+                this.setVisible(false);
+                m.pack();
+                m.setLocationRelativeTo(null);
             } else {
                 JOptionPane.showMessageDialog(this, "SAI TÊN ĐĂNG NHẬP HOẶC MẬT KHẨU", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
             }
