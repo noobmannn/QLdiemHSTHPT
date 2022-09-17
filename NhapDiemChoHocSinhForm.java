@@ -3,6 +3,7 @@ package com.actvn.qldiemhsthpt;
 import static com.actvn.qldiemhsthpt.XuLyFile.JSON_DIEM_PATH;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
@@ -15,7 +16,7 @@ public class NhapDiemChoHocSinhForm extends javax.swing.JFrame {
     static DefaultTableModel model;
     int selectedRowIndex;
     static List<HocSinh> datahs;
-    List<String> listMaHS;
+    String[] listMaHS;
 
     /**
      * Creates new form NhapDiemChoHocSinhForm
@@ -27,6 +28,7 @@ public class NhapDiemChoHocSinhForm extends javax.swing.JFrame {
         model = (DefaultTableModel) tblBangDiem.getModel();
         datahs = XuLyFile.readJSONFileTT(com.actvn.qldiemhsthpt.XuLyFile.JSON_THONGTIN_PATH);
         listMaHS = createStringListData(datahs);
+        cbxMaHS.setModel(new DefaultComboBoxModel<>(listMaHS));
         fillTable();
     }
 
@@ -54,7 +56,6 @@ public class NhapDiemChoHocSinhForm extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        txtMaHS = new javax.swing.JTextField();
         txtToan = new javax.swing.JTextField();
         txtLy = new javax.swing.JTextField();
         txtHoa = new javax.swing.JTextField();
@@ -78,6 +79,7 @@ public class NhapDiemChoHocSinhForm extends javax.swing.JFrame {
         txtTimKiem = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
         btnquaylai = new javax.swing.JButton();
+        cbxMaHS = new javax.swing.JComboBox<>();
 
         setAlwaysOnTop(true);
         setAutoRequestFocus(false);
@@ -150,7 +152,6 @@ public class NhapDiemChoHocSinhForm extends javax.swing.JFrame {
 
         jLabel13.setText("Giáo Dục Công Dân:");
         jPanel2.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 330, 120, -1));
-        jPanel2.add(txtMaHS, new org.netbeans.lib.awtextra.AbsoluteConstraints(141, 10, 128, -1));
         jPanel2.add(txtToan, new org.netbeans.lib.awtextra.AbsoluteConstraints(145, 75, 77, -1));
         jPanel2.add(txtLy, new org.netbeans.lib.awtextra.AbsoluteConstraints(145, 103, 77, -1));
         jPanel2.add(txtHoa, new org.netbeans.lib.awtextra.AbsoluteConstraints(145, 131, 77, -1));
@@ -255,6 +256,9 @@ public class NhapDiemChoHocSinhForm extends javax.swing.JFrame {
         });
         jPanel2.add(btnquaylai, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 460, 100, 30));
 
+        cbxMaHS.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jPanel2.add(cbxMaHS, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 10, 90, 30));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -276,10 +280,10 @@ public class NhapDiemChoHocSinhForm extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    static List<String> createStringListData(List<HocSinh> datahs) {
-        List<String> mahs = new ArrayList<>();
-        for (HocSinh item : datahs) {
-            mahs.add(item.getMaHS());
+    static String[] createStringListData(List<HocSinh> datahs) {
+        String[] mahs = new String[data.size()];
+        for (int i = 0; i < datahs.size(); i++) {
+            mahs[i] = datahs.get(i).getMaHS();
         }
         return mahs;
     }
@@ -327,7 +331,7 @@ public class NhapDiemChoHocSinhForm extends javax.swing.JFrame {
         }
     }
 
-    private boolean checkMaHS(List<String> mahs, String s) {
+    private boolean checkMaHS(String[] mahs, String s) {
         for (String item : mahs) {
             if (item.equals(s)) {
                 return true;
@@ -339,7 +343,7 @@ public class NhapDiemChoHocSinhForm extends javax.swing.JFrame {
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
 
         try {
-            String mahs = txtMaHS.getText();
+            String mahs = cbxMaHS.getSelectedItem().toString();
             List<DiemTungMon> TCM = new ArrayList<>();
             TCM.add(new DiemTungMon(Double.parseDouble(txtToan.getText())));
             TCM.add(new DiemTungMon(Double.parseDouble(txtLy.getText())));
@@ -386,7 +390,7 @@ public class NhapDiemChoHocSinhForm extends javax.swing.JFrame {
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void btnLamTrongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLamTrongActionPerformed
-        txtMaHS.setText("");
+        cbxMaHS.setSelectedIndex(0);
         txtToan.setText("");
         txtLy.setText("");
         txtHoa.setText("");
@@ -416,7 +420,7 @@ public class NhapDiemChoHocSinhForm extends javax.swing.JFrame {
         TCM.add(new DiemTungMon(Double.valueOf(model.getValueAt(selectedRowIndex, 11).toString())));
         hs.setTatCaMon(TCM);
 
-        txtMaHS.setText(hs.getMaHS());
+        cbxMaHS.setSelectedItem(hs.getMaHS());
         txtToan.setText(String.valueOf(hs.getTatCaMon().get(0).getDiem_cac_mon()));
         txtLy.setText(String.valueOf(hs.getTatCaMon().get(1).getDiem_cac_mon()));
         txtHoa.setText(String.valueOf(hs.getTatCaMon().get(2).getDiem_cac_mon()));
@@ -432,7 +436,7 @@ public class NhapDiemChoHocSinhForm extends javax.swing.JFrame {
 
     private void btnSuaDiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaDiemActionPerformed
         try {
-            String mahs = txtMaHS.getText();
+            String mahs = cbxMaHS.getSelectedItem().toString();
             List<DiemTungMon> TCM = new ArrayList<>();
             TCM.add(new DiemTungMon(Double.parseDouble(txtToan.getText())));
             TCM.add(new DiemTungMon(Double.parseDouble(txtLy.getText())));
@@ -469,7 +473,7 @@ public class NhapDiemChoHocSinhForm extends javax.swing.JFrame {
                 }
             } else {
                 JOptionPane.showMessageDialog(this, "Không Được Sửa Mã Sinh Viên", "CẢNH BÁO!!!", JOptionPane.ERROR_MESSAGE);
-                txtMaHS.setText(model.getValueAt(selectedRowIndex, 1).toString());
+                cbxMaHS.setSelectedItem(model.getValueAt(selectedRowIndex, 1));
             }
         } catch (java.lang.NumberFormatException ex) {
             JOptionPane.showMessageDialog(this, "Định dạng không hợp lệ", "CẢNH BÁO!!!", JOptionPane.ERROR_MESSAGE);
@@ -572,6 +576,7 @@ public class NhapDiemChoHocSinhForm extends javax.swing.JFrame {
     private javax.swing.JButton btnXoa;
     private javax.swing.JButton btnXuatFileJSON;
     private javax.swing.JButton btnquaylai;
+    private javax.swing.JComboBox<String> cbxMaHS;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -595,7 +600,6 @@ public class NhapDiemChoHocSinhForm extends javax.swing.JFrame {
     private javax.swing.JTextField txtGDCD;
     private javax.swing.JTextField txtHoa;
     private javax.swing.JTextField txtLy;
-    private javax.swing.JTextField txtMaHS;
     private javax.swing.JTextField txtNguVan;
     private javax.swing.JTextField txtSinh;
     private javax.swing.JTextField txtSu;
