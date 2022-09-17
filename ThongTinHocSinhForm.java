@@ -9,7 +9,7 @@ import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 
-public class ThongTinHocSinh extends javax.swing.JFrame {
+public class ThongTinHocSinhForm extends javax.swing.JFrame {
 
     /**
      * Creates new form ThongTinHocSinh
@@ -19,7 +19,7 @@ public class ThongTinHocSinh extends javax.swing.JFrame {
     int selectedRowIndex;
     SimpleDateFormat df = com.actvn.qldiemhsthpt.DateFormat.DF;
 
-    public ThongTinHocSinh() {
+    public ThongTinHocSinhForm() {
         initComponents();
         data = XuLyFile.readJSONFileTT(com.actvn.qldiemhsthpt.XuLyFile.JSON_THONGTIN_PATH);
         model = (DefaultTableModel) tblBangThongTin.getModel();
@@ -464,7 +464,7 @@ public class ThongTinHocSinh extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSapXepActionPerformed
 
     private void btnLocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLocActionPerformed
-        LocThongTinHocSinh loc = new LocThongTinHocSinh();
+        LocThongTinHocSinhForm loc = new LocThongTinHocSinhForm();
         loc.setVisible(true);
         this.setVisible(false);
         loc.pack();
@@ -515,20 +515,21 @@ public class ThongTinHocSinh extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ThongTinHocSinh.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ThongTinHocSinhForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ThongTinHocSinh.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ThongTinHocSinhForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ThongTinHocSinh.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ThongTinHocSinhForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ThongTinHocSinh.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ThongTinHocSinhForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ThongTinHocSinh().setVisible(true);
+                new ThongTinHocSinhForm().setVisible(true);
             }
         });
     }

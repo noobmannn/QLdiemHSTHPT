@@ -97,7 +97,7 @@ public class MainMenu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnQLyTTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQLyTTActionPerformed
-        ThongTinHocSinh loc = new ThongTinHocSinh();
+        ThongTinHocSinhForm loc = new ThongTinHocSinhForm();
         loc.setVisible(true);
         this.setVisible(false);
         loc.pack();

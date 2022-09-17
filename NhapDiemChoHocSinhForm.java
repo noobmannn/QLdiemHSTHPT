@@ -491,7 +491,7 @@ public class NhapDiemChoHocSinhForm extends javax.swing.JFrame {
 
     private void btnLocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLocActionPerformed
         btnXuatFileJSONActionPerformed(evt);
-        LocDiemHocSinh loc = new LocDiemHocSinh();
+        LocDiemHocSinhForm loc = new LocDiemHocSinhForm();
         loc.setVisible(true);
         this.setVisible(false);
         loc.pack();
