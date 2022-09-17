@@ -11,6 +11,7 @@ public class LocThongTinHocSinhForm extends javax.swing.JFrame {
 
     List<HocSinh> data, subList;
     DefaultTableModel model;
+
     /**
      * Creates new form LocThongTinHocSinh
      */
@@ -44,7 +45,7 @@ public class LocThongTinHocSinhForm extends javax.swing.JFrame {
             }
         });
 
-        jPanel1.setBackground(new java.awt.Color(102, 102, 255));
+        jPanel1.setBackground(new java.awt.Color(51, 153, 255));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -67,8 +68,12 @@ public class LocThongTinHocSinhForm extends javax.swing.JFrame {
                 .addContainerGap(27, Short.MAX_VALUE))
         );
 
+        jLabel1.setFont(new java.awt.Font("Segoe UI Light", 0, 12)); // NOI18N
         jLabel1.setText("Nhập Lớp: ");
 
+        txtLopLoc.setFont(new java.awt.Font("Segoe UI Light", 0, 12)); // NOI18N
+
+        btnLopLoc.setFont(new java.awt.Font("Segoe UI Light", 0, 12)); // NOI18N
         btnLopLoc.setText("Lọc");
         btnLopLoc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -76,6 +81,7 @@ public class LocThongTinHocSinhForm extends javax.swing.JFrame {
             }
         });
 
+        tblBangLoc.setFont(new java.awt.Font("Segoe UI Light", 0, 12)); // NOI18N
         tblBangLoc.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -86,6 +92,8 @@ public class LocThongTinHocSinhForm extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tblBangLoc);
 
+        btnXuatJSON.setFont(new java.awt.Font("Segoe UI Light", 0, 12)); // NOI18N
+        btnXuatJSON.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/actvn/quanlysv/images/Save.png"))); // NOI18N
         btnXuatJSON.setText("Xuất ra File JSON");
         btnXuatJSON.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -124,30 +132,30 @@ public class LocThongTinHocSinhForm extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 364, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btnXuatJSON)
-                .addGap(0, 23, Short.MAX_VALUE))
+                .addComponent(btnXuatJSON, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void fillTable(List<HocSinh> subList) {
-        for(HocSinh item : subList){
+        for (HocSinh item : subList) {
             HocSinh hs = item;
             model.addRow(new Object[]{hs.getMaHS(), hs.getHoVaTenDem(), hs.getTen(), hs.getLop(),
                 ((hs.getGioiTinh() == 1) ? "Nam" : "Nữ"), hs.getSinhNhat(), hs.getQueQuan()});
         }
     }
-    
+
     private void btnLopLocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLopLocActionPerformed
         model.setRowCount(0);
         subList = new ArrayList<>();
-        for(HocSinh item : data){
-            if(item.getLop().equals(txtLopLoc.getText())){
+        for (HocSinh item : data) {
+            if (item.getLop().equals(txtLopLoc.getText())) {
                 subList.add(item);
             }
         }
-        if(!subList.isEmpty()){
+        if (!subList.isEmpty()) {
             fillTable(subList);
         } else {
             JOptionPane.showMessageDialog(this, "Lớp Không Tồn Tại", "CẢNH BÁO!!!", JOptionPane.ERROR_MESSAGE);

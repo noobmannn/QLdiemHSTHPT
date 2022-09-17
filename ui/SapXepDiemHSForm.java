@@ -1,4 +1,3 @@
-
 package com.actvn.qldiemhsthpt.ui;
 
 import com.actvn.qldiemhsthpt.util.FileControl;
@@ -13,6 +12,7 @@ public class SapXepDiemHSForm extends javax.swing.JFrame {
     List<DiemCuaHS> data, subList;
     DefaultTableModel model;
     DiemCuaHS diemcuahs;
+
     /**
      * Creates new form SapXepDiemHSForm
      */
@@ -52,7 +52,7 @@ public class SapXepDiemHSForm extends javax.swing.JFrame {
         });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setBackground(new java.awt.Color(51, 102, 255));
+        jPanel1.setBackground(new java.awt.Color(51, 153, 255));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -79,12 +79,17 @@ public class SapXepDiemHSForm extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
+        jLabel2.setFont(new java.awt.Font("Segoe UI Light", 0, 12)); // NOI18N
         jLabel2.setText("Sắp Xếp Theo Điểm Trung Bình Môn:");
 
+        jLabel3.setFont(new java.awt.Font("Segoe UI Light", 0, 12)); // NOI18N
         jLabel3.setText("Sắp Xếp Theo Điểm Của Môn Học:");
 
+        cbxMonHoc.setFont(new java.awt.Font("Segoe UI Light", 0, 12)); // NOI18N
         cbxMonHoc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Toán", "Vật Lý", "Hoá Học", "Sinh Học", "Tin Học", "Công Nghệ", "Ngữ Văn", "Địa Lý", "Lịch Sử", "Giáo Dục Công Dân" }));
 
+        btnSapxep1.setFont(new java.awt.Font("Segoe UI Light", 0, 12)); // NOI18N
+        btnSapxep1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/actvn/quanlysv/images/Statistics.png"))); // NOI18N
         btnSapxep1.setText("Sắp Xếp");
         btnSapxep1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -92,6 +97,8 @@ public class SapXepDiemHSForm extends javax.swing.JFrame {
             }
         });
 
+        btnSapXep2.setFont(new java.awt.Font("Segoe UI Light", 0, 12)); // NOI18N
+        btnSapXep2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/actvn/quanlysv/images/Statistics.png"))); // NOI18N
         btnSapXep2.setText("Sắp Xếp");
         btnSapXep2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -138,6 +145,7 @@ public class SapXepDiemHSForm extends javax.swing.JFrame {
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 75, -1, -1));
 
+        tblSapXep.setFont(new java.awt.Font("Segoe UI Light", 0, 12)); // NOI18N
         tblSapXep.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -152,6 +160,8 @@ public class SapXepDiemHSForm extends javax.swing.JFrame {
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
+        btnXuatFile.setFont(new java.awt.Font("Segoe UI Light", 0, 12)); // NOI18N
+        btnXuatFile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/actvn/quanlysv/images/Save.png"))); // NOI18N
         btnXuatFile.setText("Xuất File JSON");
         btnXuatFile.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -200,7 +210,7 @@ public class SapXepDiemHSForm extends javax.swing.JFrame {
                 hs.getHocLuc(),});
         }
     }
-    
+
     private void btnSapxep1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSapxep1ActionPerformed
         model.setRowCount(0);
         subList = DiemCuaHSController.compareSubject(data, 10);
@@ -211,16 +221,26 @@ public class SapXepDiemHSForm extends javax.swing.JFrame {
         model.setRowCount(0);
         subList = new ArrayList<>();
         switch (cbxMonHoc.getSelectedItem().toString()) {
-            case "Toán" -> subList = DiemCuaHSController.compareSubject(data, 0);
-            case "Vật Lý" -> subList = DiemCuaHSController.compareSubject(data, 1);
-            case "Hoá Học" -> subList = DiemCuaHSController.compareSubject(data, 2);
-            case "Sinh Học" -> subList = DiemCuaHSController.compareSubject(data, 3);
-            case "Tin Học" -> subList = DiemCuaHSController.compareSubject(data, 4);
-            case "Công Nghệ" -> subList =  DiemCuaHSController.compareSubject(data, 5);
-            case "Ngữ Văn" -> subList = DiemCuaHSController.compareSubject(data, 6);
-            case "Địa Lý" -> subList = DiemCuaHSController.compareSubject(data, 7);
-            case "Lịch Sử" -> subList = DiemCuaHSController.compareSubject(data, 8);
-            case "Giáo Dục Công Dân" ->subList = DiemCuaHSController.compareSubject(data, 9);
+            case "Toán" ->
+                subList = DiemCuaHSController.compareSubject(data, 0);
+            case "Vật Lý" ->
+                subList = DiemCuaHSController.compareSubject(data, 1);
+            case "Hoá Học" ->
+                subList = DiemCuaHSController.compareSubject(data, 2);
+            case "Sinh Học" ->
+                subList = DiemCuaHSController.compareSubject(data, 3);
+            case "Tin Học" ->
+                subList = DiemCuaHSController.compareSubject(data, 4);
+            case "Công Nghệ" ->
+                subList = DiemCuaHSController.compareSubject(data, 5);
+            case "Ngữ Văn" ->
+                subList = DiemCuaHSController.compareSubject(data, 6);
+            case "Địa Lý" ->
+                subList = DiemCuaHSController.compareSubject(data, 7);
+            case "Lịch Sử" ->
+                subList = DiemCuaHSController.compareSubject(data, 8);
+            case "Giáo Dục Công Dân" ->
+                subList = DiemCuaHSController.compareSubject(data, 9);
         }
         fillTable(subList);
     }//GEN-LAST:event_btnSapXep2ActionPerformed

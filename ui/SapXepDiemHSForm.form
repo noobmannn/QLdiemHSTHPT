@@ -28,7 +28,7 @@
     <Container class="javax.swing.JPanel" name="jPanel1">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="ff" green="66" red="33" type="rgb"/>
+          <Color blue="ff" green="99" red="33" type="rgb"/>
         </Property>
       </Properties>
       <Constraints>
@@ -133,16 +133,25 @@
       <SubComponents>
         <Component class="javax.swing.JLabel" name="jLabel2">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI Light" size="12" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="S&#x1eaf;p X&#x1ebf;p Theo &#x110;i&#x1ec3;m Trung B&#xec;nh M&#xf4;n:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel3">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI Light" size="12" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="S&#x1eaf;p X&#x1ebf;p Theo &#x110;i&#x1ec3;m C&#x1ee7;a M&#xf4;n H&#x1ecd;c:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JComboBox" name="cbxMonHoc">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI Light" size="12" style="0"/>
+            </Property>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="10">
                 <StringItem index="0" value="To&#xe1;n"/>
@@ -164,6 +173,12 @@
         </Component>
         <Component class="javax.swing.JToggleButton" name="btnSapxep1">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI Light" size="12" style="0"/>
+            </Property>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/com/actvn/quanlysv/images/Statistics.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="S&#x1eaf;p X&#x1ebf;p"/>
           </Properties>
           <Events>
@@ -172,6 +187,12 @@
         </Component>
         <Component class="javax.swing.JToggleButton" name="btnSapXep2">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI Light" size="12" style="0"/>
+            </Property>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/com/actvn/quanlysv/images/Statistics.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="S&#x1eaf;p X&#x1ebf;p"/>
           </Properties>
           <Events>
@@ -194,6 +215,9 @@
       <SubComponents>
         <Component class="javax.swing.JTable" name="tblSapXep">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI Light" size="12" style="0"/>
+            </Property>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
               <Table columnCount="13" rowCount="0">
                 <Column editable="true" title="M&#xe3; HS" type="java.lang.Object"/>
@@ -322,6 +346,12 @@
       <SubComponents>
         <Component class="javax.swing.JButton" name="btnXuatFile">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI Light" size="12" style="0"/>
+            </Property>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/com/actvn/quanlysv/images/Save.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Xu&#x1ea5;t File JSON"/>
           </Properties>
           <Events>

@@ -1,15 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package com.actvn.qldiemhsthpt.ui;
 
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author anhtu
- */
 public class LoginFrame extends javax.swing.JFrame {
 
     /**
@@ -64,7 +56,7 @@ public class LoginFrame extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Segoe UI Black", 0, 12)); // NOI18N
         jLabel3.setText("Mật khẩu: ");
 
-        btnDatLai.setBackground(new java.awt.Color(51, 51, 255));
+        btnDatLai.setBackground(new java.awt.Color(51, 153, 255));
         btnDatLai.setFont(new java.awt.Font("Segoe UI Black", 0, 12)); // NOI18N
         btnDatLai.setForeground(new java.awt.Color(255, 255, 255));
         btnDatLai.setText("Xóa");
@@ -74,9 +66,10 @@ public class LoginFrame extends javax.swing.JFrame {
             }
         });
 
-        btnDangNhap.setBackground(new java.awt.Color(51, 51, 255));
+        btnDangNhap.setBackground(new java.awt.Color(51, 153, 255));
         btnDangNhap.setFont(new java.awt.Font("Segoe UI Black", 0, 12)); // NOI18N
         btnDangNhap.setForeground(new java.awt.Color(255, 255, 255));
+        btnDangNhap.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/actvn/quanlysv/images/Open door.png"))); // NOI18N
         btnDangNhap.setText("Đăng nhập");
         btnDangNhap.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -84,7 +77,7 @@ public class LoginFrame extends javax.swing.JFrame {
             }
         });
 
-        jPanel3.setBackground(new java.awt.Color(153, 0, 255));
+        jPanel3.setBackground(new java.awt.Color(51, 153, 255));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI Black", 0, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -144,7 +137,7 @@ public class LoginFrame extends javax.swing.JFrame {
                     .addComponent(btnDatLai))
                 .addGap(18, 18, 18)
                 .addComponent(btnDangNhap)
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(10, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

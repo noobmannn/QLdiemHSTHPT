@@ -64,7 +64,7 @@ public class LocDiemHocSinhForm extends javax.swing.JFrame {
             }
         });
 
-        jPanel1.setBackground(new java.awt.Color(51, 102, 255));
+        jPanel1.setBackground(new java.awt.Color(51, 153, 255));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -89,14 +89,19 @@ public class LocDiemHocSinhForm extends javax.swing.JFrame {
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
+        jLabel2.setFont(new java.awt.Font("Segoe UI Light", 0, 12)); // NOI18N
         jLabel2.setText("Lọc Theo Xếp Hạng Học Lực");
 
+        jLabel3.setFont(new java.awt.Font("Segoe UI Light", 0, 12)); // NOI18N
         jLabel3.setText("Top 5 Học Sinh Cao Điểm Nhất Của Môn Học: ");
 
+        cbxHocLuc.setFont(new java.awt.Font("Segoe UI Light", 0, 12)); // NOI18N
         cbxHocLuc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Giỏi", "Khá", "Trung Bình", "Yếu", "Kém" }));
 
+        cbxMonHoc.setFont(new java.awt.Font("Segoe UI Light", 0, 12)); // NOI18N
         cbxMonHoc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Toán", "Vật Lý", "Hoá Học", "Sinh Học", "Tin Học", "Công Nghệ", "Ngữ Văn", "Địa Lý", "Lịch Sử", "Giáo Dục Công Dân" }));
 
+        btnHienThi1.setFont(new java.awt.Font("Segoe UI Light", 0, 12)); // NOI18N
         btnHienThi1.setText("Hiển Thị");
         btnHienThi1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -104,6 +109,7 @@ public class LocDiemHocSinhForm extends javax.swing.JFrame {
             }
         });
 
+        btnHienThi2.setFont(new java.awt.Font("Segoe UI Light", 0, 12)); // NOI18N
         btnHienThi2.setText("Hiển Thị");
         btnHienThi2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -146,6 +152,7 @@ public class LocDiemHocSinhForm extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        tblBangLoc.setFont(new java.awt.Font("Segoe UI Light", 0, 12)); // NOI18N
         tblBangLoc.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -158,6 +165,8 @@ public class LocDiemHocSinhForm extends javax.swing.JFrame {
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
 
+        btnXuatFile.setFont(new java.awt.Font("Segoe UI Light", 0, 12)); // NOI18N
+        btnXuatFile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/actvn/quanlysv/images/Save.png"))); // NOI18N
         btnXuatFile.setText("Xuất File JSON");
         btnXuatFile.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -257,16 +266,26 @@ public class LocDiemHocSinhForm extends javax.swing.JFrame {
         model.setRowCount(0);
         subList = new ArrayList<>();
         switch (cbxMonHoc.getSelectedItem().toString()) {
-            case "Toán" -> subList = DiemCuaHSController.filterSubject(data, 0);
-            case "Vật Lý" -> subList = DiemCuaHSController.filterSubject(data, 1);
-            case "Hoá Học" -> subList = DiemCuaHSController.filterSubject(data, 2);
-            case "Sinh Học" -> subList = DiemCuaHSController.filterSubject(data, 3);
-            case "Tin Học" -> subList = DiemCuaHSController.filterSubject(data, 4);
-            case "Công Nghệ" -> subList = DiemCuaHSController.filterSubject(data, 5);
-            case "Ngữ Văn" -> subList = DiemCuaHSController.filterSubject(data, 6);
-            case "Địa Lý" -> subList = DiemCuaHSController.filterSubject(data, 7);
-            case "Lịch Sử" -> subList = DiemCuaHSController.filterSubject(data, 8);
-            case "Giáo Dục Công Dân" -> subList = DiemCuaHSController.filterSubject(data, 9);
+            case "Toán" ->
+                subList = DiemCuaHSController.filterSubject(data, 0);
+            case "Vật Lý" ->
+                subList = DiemCuaHSController.filterSubject(data, 1);
+            case "Hoá Học" ->
+                subList = DiemCuaHSController.filterSubject(data, 2);
+            case "Sinh Học" ->
+                subList = DiemCuaHSController.filterSubject(data, 3);
+            case "Tin Học" ->
+                subList = DiemCuaHSController.filterSubject(data, 4);
+            case "Công Nghệ" ->
+                subList = DiemCuaHSController.filterSubject(data, 5);
+            case "Ngữ Văn" ->
+                subList = DiemCuaHSController.filterSubject(data, 6);
+            case "Địa Lý" ->
+                subList = DiemCuaHSController.filterSubject(data, 7);
+            case "Lịch Sử" ->
+                subList = DiemCuaHSController.filterSubject(data, 8);
+            case "Giáo Dục Công Dân" ->
+                subList = DiemCuaHSController.filterSubject(data, 9);
         }
         fillTable(subList);
     }//GEN-LAST:event_btnHienThi2ActionPerformed
