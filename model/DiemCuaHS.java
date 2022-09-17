@@ -1,4 +1,4 @@
-package com.actvn.qldiemhsthpt;
+package com.actvn.qldiemhsthpt.model;
 
 import java.util.ArrayList;
 import java.util.List;

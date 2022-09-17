@@ -1,6 +1,9 @@
 
-package com.actvn.qldiemhsthpt;
+package com.actvn.qldiemhsthpt.ui;
 
+import com.actvn.qldiemhsthpt.util.FileControl;
+import com.actvn.qldiemhsthpt.model.DiemCuaHSController;
+import com.actvn.qldiemhsthpt.model.DiemCuaHS;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
@@ -15,7 +18,7 @@ public class SapXepDiemHSForm extends javax.swing.JFrame {
      */
     public SapXepDiemHSForm() {
         initComponents();
-        data = XuLyFile.readJSONFile(com.actvn.qldiemhsthpt.XuLyFile.JSON_DIEM_PATH);
+        data = FileControl.readJSONFile(com.actvn.qldiemhsthpt.util.FileControl.JSON_DIEM_PATH);
         model = (DefaultTableModel) tblSapXep.getModel();
         diemcuahs = null;
     }
@@ -231,7 +234,7 @@ public class SapXepDiemHSForm extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowClosing
 
     private void btnXuatFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXuatFileActionPerformed
-        XuLyFile.writeJSONFile(subList, com.actvn.qldiemhsthpt.XuLyFile.JSON_SORT_PATH);
+        FileControl.writeJSONFile(subList, com.actvn.qldiemhsthpt.util.FileControl.JSON_SORT_PATH);
     }//GEN-LAST:event_btnXuatFileActionPerformed
 
     /**

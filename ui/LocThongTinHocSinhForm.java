@@ -1,5 +1,7 @@
-package com.actvn.qldiemhsthpt;
+package com.actvn.qldiemhsthpt.ui;
 
+import com.actvn.qldiemhsthpt.util.FileControl;
+import com.actvn.qldiemhsthpt.model.HocSinh;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -14,7 +16,7 @@ public class LocThongTinHocSinhForm extends javax.swing.JFrame {
      */
     public LocThongTinHocSinhForm() {
         initComponents();
-        data = XuLyFile.readJSONFileTT(com.actvn.qldiemhsthpt.XuLyFile.JSON_THONGTIN_PATH);
+        data = FileControl.readJSONFileTT(com.actvn.qldiemhsthpt.util.FileControl.JSON_THONGTIN_PATH);
         model = (DefaultTableModel) tblBangLoc.getModel();
     }
 
@@ -153,7 +155,7 @@ public class LocThongTinHocSinhForm extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLopLocActionPerformed
 
     private void btnXuatJSONActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXuatJSONActionPerformed
-        XuLyFile.writeJSONFile(subList, com.actvn.qldiemhsthpt.XuLyFile.JSON_THONGTINLOC_PATH);
+        FileControl.writeJSONFile(subList, com.actvn.qldiemhsthpt.util.FileControl.JSON_THONGTINLOC_PATH);
     }//GEN-LAST:event_btnXuatJSONActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing

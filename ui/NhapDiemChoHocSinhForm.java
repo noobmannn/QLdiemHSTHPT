@@ -1,6 +1,12 @@
-package com.actvn.qldiemhsthpt;
+package com.actvn.qldiemhsthpt.ui;
 
-import static com.actvn.qldiemhsthpt.XuLyFile.JSON_DIEM_PATH;
+import com.actvn.qldiemhsthpt.util.FileControl;
+import com.actvn.qldiemhsthpt.ui.SapXepDiemHSForm;
+import com.actvn.qldiemhsthpt.ui.LocDiemHocSinhForm;
+import com.actvn.qldiemhsthpt.model.DiemTungMon;
+import com.actvn.qldiemhsthpt.model.DiemCuaHS;
+import com.actvn.qldiemhsthpt.model.HocSinh;
+import static com.actvn.qldiemhsthpt.util.FileControl.JSON_DIEM_PATH;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
@@ -24,9 +30,9 @@ public class NhapDiemChoHocSinhForm extends javax.swing.JFrame {
     public NhapDiemChoHocSinhForm() {
         initComponents();
         stt = 1;
-        data = XuLyFile.readJSONFile(JSON_DIEM_PATH);
+        data = FileControl.readJSONFile(JSON_DIEM_PATH);
         model = (DefaultTableModel) tblBangDiem.getModel();
-        datahs = XuLyFile.readJSONFileTT(com.actvn.qldiemhsthpt.XuLyFile.JSON_THONGTIN_PATH);
+        datahs = FileControl.readJSONFileTT(com.actvn.qldiemhsthpt.util.FileControl.JSON_THONGTIN_PATH);
         listMaHS = createStringListData(datahs);
         cbxMaHS.setModel(new DefaultComboBoxModel<>(listMaHS));
         fillTable();
@@ -481,7 +487,7 @@ public class NhapDiemChoHocSinhForm extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSuaDiemActionPerformed
 
     private void btnXuatFileJSONActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXuatFileJSONActionPerformed
-        XuLyFile.writeJSONFile(data, com.actvn.qldiemhsthpt.XuLyFile.JSON_DIEM_PATH);
+        FileControl.writeJSONFile(data, com.actvn.qldiemhsthpt.util.FileControl.JSON_DIEM_PATH);
     }//GEN-LAST:event_btnXuatFileJSONActionPerformed
 
     private void btnSapXepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSapXepActionPerformed

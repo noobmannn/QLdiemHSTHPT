@@ -1,6 +1,8 @@
 
-package com.actvn.qldiemhsthpt;
+package com.actvn.qldiemhsthpt.util;
 
+import com.actvn.qldiemhsthpt.model.DiemCuaHS;
+import com.actvn.qldiemhsthpt.model.HocSinh;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import java.io.File;
@@ -13,7 +15,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class XuLyFile {
+public class FileControl {
     private static final String CURRENT_DIR = System.getProperty("user.dir");
     private static final String SEPARATOR = File.separator;
     public static final String JSON_DIEM_PATH = CURRENT_DIR + SEPARATOR + "data" + SEPARATOR + "DiemCuaHS.json";
@@ -33,13 +35,13 @@ public class XuLyFile {
             data2 = gson.fromJson(fr, type);
 
         } catch (FileNotFoundException ex) {
-            Logger.getLogger(XuLyFile.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(FileControl.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             if (fr != null) {
                 try {
                     fr.close();
                 } catch (IOException ex) {
-                    Logger.getLogger(XuLyFile.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(FileControl.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         }
@@ -57,13 +59,13 @@ public class XuLyFile {
             data2 = gson.fromJson(fr, type);
 
         } catch (FileNotFoundException ex) {
-            Logger.getLogger(XuLyFile.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(FileControl.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             if (fr != null) {
                 try {
                     fr.close();
                 } catch (IOException ex) {
-                    Logger.getLogger(XuLyFile.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(FileControl.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         }
@@ -78,14 +80,14 @@ public class XuLyFile {
 
             gson.toJson(list, fw);
         } catch (IOException ex) {
-            Logger.getLogger(XuLyFile.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(FileControl.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             if (fw != null) {
                 try {
                     fw.flush();
                     fw.close();
                 } catch (IOException ex) {
-                    Logger.getLogger(XuLyFile.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(FileControl.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         }

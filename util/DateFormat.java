@@ -1,5 +1,5 @@
 
-package com.actvn.qldiemhsthpt;
+package com.actvn.qldiemhsthpt.util;
 
 import java.text.SimpleDateFormat;
 

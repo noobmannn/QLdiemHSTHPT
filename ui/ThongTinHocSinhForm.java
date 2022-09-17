@@ -1,5 +1,9 @@
-package com.actvn.qldiemhsthpt;
+package com.actvn.qldiemhsthpt.ui;
 
+import com.actvn.qldiemhsthpt.util.FileControl;
+import com.actvn.qldiemhsthpt.ui.LocThongTinHocSinhForm;
+import com.actvn.qldiemhsthpt.model.HocSinhController;
+import com.actvn.qldiemhsthpt.model.HocSinh;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -17,11 +21,11 @@ public class ThongTinHocSinhForm extends javax.swing.JFrame {
     List<HocSinh> data;
     static DefaultTableModel model;
     int selectedRowIndex;
-    SimpleDateFormat df = com.actvn.qldiemhsthpt.DateFormat.DF;
+    SimpleDateFormat df = com.actvn.qldiemhsthpt.util.DateFormat.DF;
 
     public ThongTinHocSinhForm() {
         initComponents();
-        data = XuLyFile.readJSONFileTT(com.actvn.qldiemhsthpt.XuLyFile.JSON_THONGTIN_PATH);
+        data = FileControl.readJSONFileTT(com.actvn.qldiemhsthpt.util.FileControl.JSON_THONGTIN_PATH);
         model = (DefaultTableModel) tblBangThongTin.getModel();
         fillTable();
     }
@@ -454,7 +458,7 @@ public class ThongTinHocSinhForm extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSuaThongTinActionPerformed
 
     private void btnXuatRaFileJSONActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXuatRaFileJSONActionPerformed
-        XuLyFile.writeJSONFile(data, com.actvn.qldiemhsthpt.XuLyFile.JSON_THONGTIN_PATH);
+        FileControl.writeJSONFile(data, com.actvn.qldiemhsthpt.util.FileControl.JSON_THONGTIN_PATH);
     }//GEN-LAST:event_btnXuatRaFileJSONActionPerformed
 
     private void btnSapXepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSapXepActionPerformed

@@ -1,4 +1,4 @@
-package com.actvn.qldiemhsthpt;
+package com.actvn.qldiemhsthpt.model;
 
 public class DiemTungMon {
 

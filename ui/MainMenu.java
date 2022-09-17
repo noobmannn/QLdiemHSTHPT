@@ -2,8 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package com.actvn.qldiemhsthpt;
+package com.actvn.qldiemhsthpt.ui;
 
+import com.actvn.qldiemhsthpt.ui.LoginFrame;
+import com.actvn.qldiemhsthpt.ui.NhapDiemChoHocSinhForm;
+import com.actvn.qldiemhsthpt.ui.ThongTinHocSinhForm;
 import javax.swing.JOptionPane;
 
 /**
