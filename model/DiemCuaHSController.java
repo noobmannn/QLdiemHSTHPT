@@ -6,10 +6,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class DiemCuaHSController {
+
     public static List<DiemCuaHS> compareSubject(List<DiemCuaHS> list, int index) {
         Comparator<DiemCuaHS> comparator;
         if (index >= 0 && index <= 9) {
-            comparator = (o1, o2) -> (int) (o2.getTatCaMon().get(index).getDiem_cac_mon() - o1.getTatCaMon().get(index).getDiem_cac_mon());
+            comparator = (o1, o2) -> (int) ((o2.getTatCaMon().get(index).getDiem_cac_mon() < o1.getTatCaMon().get(index).getDiem_cac_mon()) ? -1 : ((o2.getTatCaMon().get(index).getDiem_cac_mon() > o1.getTatCaMon().get(index).getDiem_cac_mon()) ? 1 : 0));
             list.sort(comparator);
         } else if (index == 10) {
             comparator = Comparator.comparing(DiemCuaHS::getDiemTBmon).reversed();
